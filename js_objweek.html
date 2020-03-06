@@ -5,16 +5,18 @@
 	<meta charset="UTF-8">
 	<title> Object week CIT 140</title>
 	<script>
+	
+	// main function called in the form from onclick 
 		function information()
 		{
 			var fName = document.frm1.txt1.value;
 			var lName = document.frm1.txt2.value;
 			var empNum = document.frm1.txt3.value;
-			var score1 = parseFloat(document.frm1.txt4.value);
-			var score2 = parseFloat(document.frm1.txt5.value);
-			var score3 = parseFloat(document.frm1.txt6.value);
+			var score1 = document.frm1.txt4.value;
+			var score2 = document.frm1.txt5.value;
+			var score3 = document.frm1.txt6.value;
 			
-			var scores = [ score1,score2,,score3];
+			var scores = [ score1,score2,score3];
 			
 			var Employee1 = new Employee(fName,lName,empNum,scores);
 		
@@ -22,7 +24,10 @@
 		
 		}
 	
-		function Employee (first,last,num, eval)
+	
+		// object with constructor
+		
+		function Employee(first,last,num, eval)
 		{
 			this.firstName = first;
 			this.lastName = last,
@@ -30,30 +35,37 @@
 			this.evalscore = eval;
 		}
 		
-		Employee.protoype.evalScores = function()
+		//protoype to calculate eval average
+		
+		Employee.prototype.evalScores = function()
 		{
+			var avg;
 			var sum = 0;
 			for(let i = 0 ; i < this.evalscore.length; i++)
 			{
-				sum += this.evalscore[i];
+				sum += parseInt(this.evalscore[i]);
 			}
 			
-			var avg = this.evalscore.lenght / sum ;
-			 return avg.toFixed(2);
+				avg = sum / this.evalscore.length;
+				return avg.toFixed(1);
 		};
 		
-		Employee.protoype.displayNames = function()
+		// prototype to display object names
+		
+		Employee.prototype.displayNames = function()
 		{
 			return this.firstName + " " + this.lastName;
 		
 		};
 		
+		// display function called in the main function
+		
 		function display(e)
 		{
 			var disp = "<p> Employee Name:"  + e.displayNames() + "<br>";
-			disp += " Employee Number: " + e.this.employeeNum + " Employee review scores" + e.evalscore.join(",");
-			disp += " Employee Average Eval Score: " + e.evalScores();
-			document.getElementById("display").innerHTML = disp;
+			disp += " Employee Number: " + e.employeeNum + "<br>" + "Employee review scores " + e.evalscore.join(", ") + "<br>";
+			disp += " Employee Average Eval Score: " + e.evalScores() +"<p>";
+			document.getElementById("display").innerHTML += disp;
 		
 		
 		}
